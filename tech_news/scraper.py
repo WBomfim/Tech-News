@@ -16,7 +16,6 @@ def fetch(url):
 
     except requests.Timeout:
         return None
-
     else:
         return None
 
@@ -29,7 +28,11 @@ def scrape_updates(html_content):
 
 # Requisito 3
 def scrape_next_page_link(html_content):
-    """Seu código deve vir aqui"""
+    selector = Selector(text=html_content)
+    nextButton = selector.css(".nav-links .next::attr(href)").get()
+    if not nextButton:
+        return None
+    return nextButton
 
 
 # Requisito 4
