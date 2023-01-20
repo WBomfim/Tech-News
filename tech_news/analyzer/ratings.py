@@ -15,4 +15,17 @@ def top_5_news():
 
 # Requisito 11
 def top_5_categories():
-    """Seu código deve vir aqui"""
+    news = find_news()
+    categories = {}
+
+    for new in news:
+        if new["category"] not in categories:
+            categories[new["category"]] = 0
+        categories[new["category"]] += 1
+
+    sorted_categories = sorted(
+        categories.items(),
+        key=lambda
+        item: (-item[1], item[0])
+    )
+    return [category[0] for category in sorted_categories[:5]]
