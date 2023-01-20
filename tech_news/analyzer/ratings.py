@@ -7,8 +7,7 @@ def top_5_news():
     sorted_news = sorted(
         news,
         key=lambda
-        item: (item["comments_count"], item["title"]),
-        reverse=True
+        item: (-item["comments_count"], item["title"]),
     )
     return [(new["title"], new["url"]) for new in sorted_news[:5]]
 
