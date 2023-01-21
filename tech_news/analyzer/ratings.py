@@ -1,3 +1,4 @@
+from collections import Counter
 from tech_news.database import find_news
 
 
@@ -15,12 +16,7 @@ def top_5_news():
 # Requisito 11
 def top_5_categories():
     news = find_news()
-    categories = {}
-
-    for new in news:
-        if new["category"] not in categories:
-            categories[new["category"]] = 0
-        categories[new["category"]] += 1
+    categories = Counter(new["category"] for new in news)
 
     sorted_categories = sorted(
         categories.items(),
