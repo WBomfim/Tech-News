@@ -11,14 +11,15 @@ def search_by_title(title):
 # Requisito 7
 def search_by_date(date):
     try:
-        formatted_date = datetime.strptime(
-            date, "%Y-%m-%d").strftime("%d/%m/%Y")
+        formatted_date = (
+            datetime.strptime(date, "%Y-%m-%d").strftime("%d/%m/%Y")
+        )
+
+        news = search_news({"timestamp": {"$regex": formatted_date}})
+        return [(new["title"], new["url"]) for new in news]
+
     except ValueError:
         raise ValueError("Data inválida")
-    else:
-        news = search_news({"timestamp": {"$regex": formatted_date}})
-
-    return [(new["title"], new["url"]) for new in news]
 
 
 # Requisito 8

@@ -12,12 +12,9 @@ def fetch(url):
             url, headers={"user-agent": "Fake user-agent"}, timeout=3
         )
 
-        if response.status_code == 200:
-            return response.text
+        return response.text if response.status_code == 200 else None
 
     except requests.Timeout:
-        return None
-    else:
         return None
 
 
@@ -31,9 +28,7 @@ def scrape_updates(html_content):
 def scrape_next_page_link(html_content):
     selector = Selector(text=html_content)
     nextButton = selector.css(".nav-links .next::attr(href)").get()
-    if not nextButton:
-        return None
-    return nextButton
+    return nextButton if nextButton else None
 
 
 # Requisito 4
